@@ -5,7 +5,7 @@ import BrightnessMediumIcon from "@material-ui/icons/BrightnessMedium";
 import Slider from '@material-ui/core/Slider';
 import Slider2 from '../slider2/Slider2'
 import './Brightness.styles.css'; 
-import SidebarItem from '../sidebar/SideBarItem'
+import ButtonsItem from '../buttons/ButtonsItem'
 
 
 const DEFAULT_OPTIONS = [
@@ -89,7 +89,6 @@ const Brightness = (props) => {
   }, [options])
   
   function handleSliderChange({ target }) {
-    console.log('>>', target)
     setOptions(prevOptions => {
       return prevOptions.map((option, index) => {
         if (index !== selectedOptionIndex) return option
@@ -102,13 +101,9 @@ const Brightness = (props) => {
     const filters = options.map(option => {
       return `${option.property}(${option.value}${option.unit})`
     })
-
-     const temp = { filter: filters.join('') }
-     console.log(temp)
-    return props.setImgData(temp)
-    
+     const newFilteredData = { filter: filters.join('') }
+    return props.setImgData(newFilteredData)
   }
-
   // end
 
   return (
@@ -129,23 +124,21 @@ const Brightness = (props) => {
           marks
           min={0}
           max={255}
-        /> :   <Slider2 
+        /> :   
+        <Slider2 
           min={selectedOption.range.min}
           max={selectedOption.range.max}
           value={selectedOption.value}
-          aria-labelledby="discrete-slider-restrict"
-          step={1}
-          // valueLabelDisplay="auto"
-          marks
-        handleChange={handleSliderChange}
-      />}
+          handleChange={handleSliderChange}
+        />
+      }
       </div>
       </Container>
        {/* start  */}
-      <div className="sidebar" style={{display: "flex", justifyContent: "center", margin: '3rem'}}>
+      <div style={{display: "flex", justifyContent: "center", margin: '3rem'}}>
         {options.map((option, index) => {
           return (
-            <SidebarItem
+            <ButtonsItem
               key={index}
               name={option.name}
               active={index === selectedOptionIndex}

@@ -5,7 +5,7 @@ export default function Slider2({ min, max, value, handleChange}) {
     <div className="slider-container" >
       <input
         type="range"
-        className="slider slider2"
+        className="slider2"
         min={min}
         max={max}
         value={value}
